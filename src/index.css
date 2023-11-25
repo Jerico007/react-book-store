@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar start */
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #383434;
+  padding: 1vw;
+}
+.Navbar > .Logo > img {
+  height: 3vw;
+}
+
+.Word-logo > img {
+  height: 1.1vw;
+}
+
+.Logo {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.Search {
+  display: flex;
+  gap: 1vw;
+  align-items: center;
+}
+
+.Search-logo {
+  background-color: #2e2e2e;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+}
+.Search-logo img {
+  height: 17px;
+}
+
+.Search .Search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Search-bar input {
+  padding: 4px;
+  border: none;
+  outline: none;
+  width: 37vw;
+  background-color: #2e2e2e;
+  color: white;
+}
+
+.Search-btn {
+  background-color: #2e2e2e;
+  color: white;
+  border: 1px solid #ffe1a9;
+  width: 15vw;
+  height: auto;
+  padding: 0.1vw;
+}
+
+.Other-logo {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.Other-logo > * {
+  padding-left: 3vw;
+  cursor: pointer;
+}
+
+.Other-logo div img {
+  height: 2vw;
+ 
+}
+/* Navbar end */
+
+
+/* Title banner */
+
+.Title{
+  display: grid;
+  grid-template-columns:  repeat(3,1fr);
+  gap: 5%;
+  padding: 5px;
+}
+
+.Title  div{
+  display: flex;
+  align-items: center;
+  width: 16vw;
+  height: 16vw;
+ 
+  left: 4vw;
+  position: relative;
+}
+
+.Title div > img{
+  height: 100px;
+  z-index: 100;
+  position: absolute;
+  transform: rotate(-11deg);
+  left: -21%;
+}
+
+.Title div div{
+  display: flex;
+  flex-direction: column;
+  gap: 3%;
+}
+
+.Title div div > *{
+  font-size: 14px;
+}
+
+.Title div div  p{
+  height: 14vw;
+  overflow: auto;
+}
+
