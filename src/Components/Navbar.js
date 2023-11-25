@@ -6,7 +6,27 @@ import heart_logo from "../image Assets/bx_bx-book-heart.png";
 import bell_logo from "../image Assets/ic_round-notifications-none.png";
 import diamond_logo from "../image Assets/Vector.png";
 import user_logo from "../image Assets/IMG20210528181544.png";
-const Navbar = () => {
+
+import { useState } from "react";
+const Navbar = ({Search}) => {
+  //useState to take input
+  const [value , setValue] = useState("");
+  
+ 
+
+  //function to handel search
+  function handelSearch()
+  {
+       if(value)
+       {
+        let str = value;
+          str = str.trim().split(" ");
+          str = str.join("");
+          Search(str);       
+       }
+       return;
+  }
+
   return (
     <div className="Navbar">
       <div className="Logo">
@@ -21,11 +41,12 @@ const Navbar = () => {
             <img src={search_logo} alt="Img not found" />
           </div>
           <input
-            type="text"
+            type="text" value={value}
             placeholder="Search for the book you want and read it now... Sherlock Holmes, Harry Pot..."
+            onInput={(e)=>(setValue(e.target.value))}
           />
         </div>
-            <button className="Search-btn">Search</button>
+            <button className="Search-btn" onClick={handelSearch}>Search</button>
       </div>
       <div className="Other-logo">
         <div><img src={heart_logo} alt="Img not found"/></div>
