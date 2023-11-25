@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+
 /* Navbar start */
 .Navbar {
   display: flex;
@@ -84,45 +85,28 @@
 /* Navbar end */
 
 
-/* Title banner */
+/* Mainbody  */
 
-.Title{
+.Mainbody{
+  background-color: #242121;
+  /* height: 100vh; */
+}
+
+.Cards{
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  padding: 3vw;
   display: grid;
-  grid-template-columns:  repeat(3,1fr);
+  grid-template-columns: repeat(6,1fr);
   gap: 5%;
-  padding: 5px;
 }
 
-.Title  div{
-  display: flex;
-  align-items: center;
-  width: 16vw;
-  height: 16vw;
- 
-  left: 4vw;
-  position: relative;
+.Cards  div > img{
+  cursor: pointer;
+  height: 13vw;
+  width: 8vw;
+  border: none;
+  box-shadow: 0px 0px 7px 3px white;
 }
-
-.Title div > img{
-  height: 100px;
-  z-index: 100;
-  position: absolute;
-  transform: rotate(-11deg);
-  left: -21%;
-}
-
-.Title div div{
-  display: flex;
-  flex-direction: column;
-  gap: 3%;
-}
-
-.Title div div > *{
-  font-size: 14px;
-}
-
-.Title div div  p{
-  height: 14vw;
-  overflow: auto;
-}
-

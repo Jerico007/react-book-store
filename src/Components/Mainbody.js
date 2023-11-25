@@ -12,7 +12,7 @@ const Mainbody = () => {
   //Error
   const [Error, setError] = useState("");
 
-//   console.log(Arrdata);
+  console.log(Arrdata);
 
   //Function to fetch book data
   async function fetchData(query) {
@@ -21,7 +21,7 @@ const Mainbody = () => {
       const response = await axios.get(
         `https://www.googleapis.com/books/v1/volumes?q=${query}`
       );
-
+      // console.log(response.data.items);
       let arr = response.data.items;
       arr.forEach((val) => {
         Arrdata.push(val);
@@ -38,10 +38,26 @@ const Mainbody = () => {
     fetchData("SherlockHolmes");
   }, []);
 
+
+  function handelClick(e){
+     console.log(e.target);
+  }
+
   return (
     <div className="Mainbody">
       {
-        bookId === "" ? <Title data={[Arrdata[0],Arrdata[3],Arrdata[2]]}/> : ""
+        bookId !=="" ? <Title data={bookId}/> : ""
+      }
+      {
+        Arrdata.length > 0 ? <div className="Cards">
+            {
+              Arrdata.map((val)=>(
+                <div key={val.id} onClick={handelClick} id={val.id}>
+                  <img src={val.volumeInfo.imageLinks.smallThumbnail} alt="Img not found" />
+                </div>
+              ))
+            }
+        </div> :""
       }
     </div>
   );
