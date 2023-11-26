@@ -2,76 +2,94 @@ import React from "react";
 import Title from "./Title";
 import { useEffect, useState } from "react";
 import axios from "axios";
-const Mainbody = ({query}) => {
+const Mainbody = ({ query }) => {
   //useState to store data
   const [Arrdata, setData] = useState([]);
 
   //useState to show book which clicked
-  const [bookId, setBookId] = useState("");
+  const [titleData, setTitle] = useState("");
 
   //Error
   const [Error, setError] = useState("");
 
-  console.log(Arrdata);
 
   //Function to fetch book data
-  async function fetchData(query,def) {
-    // console.log(query);
+  async function fetchData(query, def) {
     try {
       const response = await axios.get(
         `https://www.googleapis.com/books/v1/volumes?q=${query}`
       );
       let arr = response.data.items;
-      if(def)
-      {
+      if (def) {
+        
         arr.forEach((val) => {
           Arrdata.push(val);
         });
         setData([...Arrdata]);
+      } else {
+        setError("");
+        setTitle("");
+        setData([...arr]);
       }
-      else{
-        setData([...arr]);  
-      }
-     
     } catch (e) {
-        setError(e.message);
+      setError(e.message);
     }
   }
 
   //useEffect to fetch harrypotter/SherlockHolmes
   useEffect(() => {
-    fetchData("HarryPotter",true);
-    fetchData("SherlockHolmes",true);
+    fetchData("HarryPotter", true);
+    fetchData("SherlockHolmes", true);
   }, []);
 
-  
-  useEffect(()=>{
-    query && fetchData(query);
-  },[query]);
-   
-  function handelClick(e){
-     console.log(e.target);
+  //useEffect to fetch searched query
+  useEffect(() => {
+    query && fetchData(query, false);
+  }, [query]);
+
+  //Function to handel click on books
+  function handelClick(e) {
+    console.log(e.target.id);
+    let obj = "";
+    for (let i = 0; i < Arrdata.length; i++) {
+      if (e.target.id === Arrdata[i].id) {
+        obj = Arrdata[i];
+        break;
+      }
+    }
+    setTitle(obj);
   }
 
   return (
     <div className="Mainbody">
+      {titleData !== "" ? <Title data={titleData} /> : ""}
+      {Error ? <h1>{Error}</h1> : ""}
       {
-        bookId !=="" ? <Title data={bookId}/> : ""
+        titleData ? <h1 className="Show-more">More books like this</h1> : ""
       }
-      {
-        Error ? <h1>{Error}</h1> : ""
-      }
-      {
-        Arrdata.length > 0 ? <div className="Cards">
-            {
-              Arrdata.map((val)=>(
-                <div key={val.id} onClick={handelClick} id={val.id}>
-                  <img src={val.volumeInfo.imageLinks.smallThumbnail} alt="Img not found" />
-                </div>
-              ))
-            }
-        </div> :""
-      }
+      {Arrdata.length > 0 ? (
+        <div className="Cards">
+          {Arrdata.map((val) => (
+            <div >
+              {val.volumeInfo.imageLinks.smallThumbnail ? (
+                <img
+                  src={val.volumeInfo.imageLinks.smallThumbnail}
+                  alt="Img not found"
+                  onClick={handelClick}
+                  id={val.id}
+                />
+              ) : (
+                <img
+                  src={val.volumeInfo.imageLinks.thumbnail}
+                  alt="Img not found"
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
